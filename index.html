@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #ff69b4;
+            margin-top: 50px;
+        }
+        button {
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+        .cat-gif {
+            width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">Will you be my Valentine?</h1>
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+    <img id="catGif" class="cat-gif" src="https://c.tenor.com/8pFJ7iZmWgMAAAAC/cute-cat.gif" alt="Cute Cat">
+
+    <script>
+        const questions = [
+            "Are you sure?",
+            "Really? Think again!",
+            "Come on, say yes!",
+            "You know you want to...",
+            "Please? For me?",
+            "Last chance!",
+            "I'll keep asking until you say yes ;)",
+            "You're breaking my heart!",
+            "What if I promise to be super sweet?",
+            "Fine, but I won't give up!"
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const questionElement = document.getElementById('question');
+        const noButton = document.getElementById('noButton');
+
+        noButton.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length) {
+                questionElement.textContent = questions[currentQuestionIndex];
+                currentQuestionIndex++;
+            } else {
+                questionElement.textContent = "I'm not giving up!";
+            }
+
+            // Change cat GIF randomly
+            const catGifs = [
+                "https://c.tenor.com/8pFJ7iZmWgMAAAAC/cute-cat.gif",
+                "https://c.tenor.com/6z4v4xvq4yYAAAAC/cat-love.gif",
+                "https://c.tenor.com/8XVZ8ZQZQZUAAAAC/kitten-cute.gif",
+                "https://c.tenor.com/8XVZ8ZQZQZUAAAAC/kitten-cute.gif"
+            ];
+            const randomGif = catGifs[Math.floor(Math.random() * catGifs.length)];
+            document.getElementById('catGif').src = randomGif;
+        });
+
+        document.getElementById('yesButton').addEventListener('click', () => {
+            questionElement.textContent = "Yay! I love you!";
+            noButton.style.display = 'none';
+            document.getElementById('catGif').src = "https://c.tenor.com/6z4v4xvq4yYAAAAC/cat-love.gif";
+        });
+    </script>
+
+</body>
+</html>
