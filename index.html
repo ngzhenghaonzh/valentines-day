@@ -6,86 +6,117 @@
     <title>Will You Be My Valentine?</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9c5d1;
+            background: linear-gradient(135deg, #f9c5d1, #f68fa7);
+            color: #fff;
             text-align: center;
-            background-color: #ffe6e6;
+            height: 100vh;
             margin: 0;
-            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
         h1 {
-            color: #ff69b4;
-            margin-top: 50px;
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
-        button {
-            background-color: #ff69b4;
+
+        .gif {
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
             border: none;
-            color: white;
-            padding: 15px 30px;
-            font-size: 20px;
             border-radius: 10px;
             cursor: pointer;
-            margin: 20px;
+            transition: transform 0.2s ease;
         }
+
+        #yesBtn {
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+        }
+
         button:hover {
-            background-color: #ff1493;
+            transform: scale(1.1);
         }
-        .cat-gif {
-            width: 300px;
-            margin-top: 20px;
+
+        .strikethrough {
+            text-decoration: line-through;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Initial Content -->
+        <h1 id="question">Will you be my Valentine?</h1>
+        <img src="https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif" alt="Valentine GIF" class="gif" id="valentineGif">
+        <div class="buttons" id="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
 
-    <h1 id="question">Will you be my Valentine?</h1>
-    <button id="yesButton">Yes</button>
-    <button id="noButton">No</button>
-    <img id="catGif" class="cat-gif" src="https://c.tenor.com/8pFJ7iZmWgMAAAAC/cute-cat.gif" alt="Cute Cat">
+        <!-- Hidden Content for "No" Response -->
+        <div id="noResponse" style="display: none;">
+            <h1>Too bad! 😢</h1>
+            <p>You are my Valentine now!</p>
+        </div>
+
+        <!-- Hidden Content for "Yes" Response -->
+        <div id="yesResponse" style="display: none;">
+            <h1>Ofc you pressed yes ❤️</h1>
+            <p>Look at that sachok <span class="strikethrough">boy</span> I mean man, right in front of you.</p>
+        </div>
+    </div>
 
     <script>
-        const questions = [
-            "Are you sure?",
-            "Really? Think again!",
-            "Come on, say yes!",
-            "You know you want to...",
-            "Please? For me?",
-            "Last chance!",
-            "I'll keep asking until you say yes ;)",
-            "You're breaking my heart!",
-            "What if I promise to be super sweet?",
-            "Fine, but I won't give up!"
-        ];
+        // Get references to the elements
+        const question = document.getElementById('question');
+        const valentineGif = document.getElementById('valentineGif');
+        const buttons = document.getElementById('buttons');
+        const noResponse = document.getElementById('noResponse');
+        const yesResponse = document.getElementById('yesResponse');
 
-        let currentQuestionIndex = 0;
+        // Add event listener for "Yes" button
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            // Hide the initial content
+            question.style.display = 'none';
+            valentineGif.style.display = 'none';
+            buttons.style.display = 'none';
 
-        const questionElement = document.getElementById('question');
-        const noButton = document.getElementById('noButton');
-
-        noButton.addEventListener('click', () => {
-            if (currentQuestionIndex < questions.length) {
-                questionElement.textContent = questions[currentQuestionIndex];
-                currentQuestionIndex++;
-            } else {
-                questionElement.textContent = "I'm not giving up!";
-            }
-
-            // Change cat GIF randomly
-            const catGifs = [
-                "https://c.tenor.com/8pFJ7iZmWgMAAAAC/cute-cat.gif",
-                "https://c.tenor.com/6z4v4xvq4yYAAAAC/cat-love.gif",
-                "https://c.tenor.com/8XVZ8ZQZQZUAAAAC/kitten-cute.gif",
-                "https://c.tenor.com/8XVZ8ZQZQZUAAAAC/kitten-cute.gif"
-            ];
-            const randomGif = catGifs[Math.floor(Math.random() * catGifs.length)];
-            document.getElementById('catGif').src = randomGif;
+            // Show the "Yes" response
+            yesResponse.style.display = 'block';
         });
 
-        document.getElementById('yesButton').addEventListener('click', () => {
-            questionElement.textContent = "Yay! I love you!";
-            noButton.style.display = 'none';
-            document.getElementById('catGif').src = "https://c.tenor.com/6z4v4xvq4yYAAAAC/cat-love.gif";
+        // Add event listener for "No" button
+        document.getElementById('noBtn').addEventListener('click', function() {
+            // Hide the initial content
+            question.style.display = 'none';
+            valentineGif.style.display = 'none';
+            buttons.style.display = 'none';
+
+            // Show the "No" response
+            noResponse.style.display = 'block';
         });
     </script>
-
 </body>
 </html>
